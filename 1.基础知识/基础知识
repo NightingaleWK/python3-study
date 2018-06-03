@@ -1,0 +1,319 @@
+在py中，一切皆对象（Object），他们都有属于自己的数据类型，有属性，有方法/函数
+
+标准数据类型Data Types
+数字 Number
+字符 String
+列表 List
+字典 Dictionary
+元组 Tuple
+集合 Set
+数字
+分整数（integer）和浮点数（floating point number）
+
+>>> 0.1 + 0.2
+0.30000000000000004
+为啥不是0.3，其实这是计算机的硬件设计导致，并非py问题，这不是事儿，所以我们可以解决这个问题
+
+>>> round(0.1 + 0.2,1)
+0.3
+基本运算
+加减乘除、乘方、求余，注意运算顺序
+
+//除
+>>> 8/2
+4.0
+>>> 8//2
+4
+//乘方
+>>> 2**2
+4
+//求余
+>>> 5%2
+1
+变量（variable）
+其格式：variable_name = value
+
+如：
+
+A哥 = '隔壁班的那个女装大佬'
+arg = 18
+我们试一下
+
+>>> age = 18
+>>> age
+18
+>>> a
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'a' is not defined
+>>>
+由上面a变量可知，变量用前先定义再使用
+
+variable的命名规则：
+只能包含字母、数字、下划线
+不能以数字开头
+不能使用py关键字，如print
+要有意义，越短越好
+有同学要问了，之前那个A哥的变量能用么，那可是汉字啊，so我们试试
+
+>>> A哥 = '隔壁班的那个女装大佬'
+>>> A哥
+'隔壁班的那个女装大佬'
+>>>
+证明，这是可以用的，但希望大家不要这样做，这是因为：
+
+别人可能会把你的腿打断！
+
+字符串String
+>>> a = 'hello'
+>>> a
+'hello'
+>>> b = "world"
+>>> b
+'world'
+>>>
+so,双引号单引号都行，但双引号可以解决一些单引号的识别问题，比如：
+
+>>> c = ' I'm WK '
+File "<stdin>", line 1
+c = ' I'm WK '
+^
+SyntaxError: invalid syntax
+>>> c = "I'm WK"
+>>> c
+"I'm WK"
+>>>
+这样我们学到一个点就是，字符串要合理使用引号包裹
+
+接下来提一下转义字符：
+
+在需要字符中使用特殊字符时，py用反斜杠转义字符
+
+>>> a = 'I\'m WK'
+>>> print(a)
+I'm WK
+再有一点就是连接字符串，使用加号，但相对而言要占用更多内存，影响速度，因为string是个不可变的对象，每次相加都会产生一个不可变的string
+
+>>> a = 'hello'
+>>> b = 'world'
+>>> a + b
+'helloworld'
+为啥两个单词之间没空格，那是因为连接ab的时候之间并没有空格，可以在a后面加一个空：
+
+>>> a = 'hello '
+>>> b = 'world'
+>>> a + b
+'hello world'
+那么怎么才能连接字符串并不要太影响系统性能呢，那就是使用格式化字符串了
+
+格式化字符串（f-strings）
+假设用加号操作一下：
+
+>>> name = 'WK'
+>>> age = '18'
+>>> name + ' ' + age
+'WK 18'
+使用f-strings：
+
+>>> f'WK {age}'
+'WK 18'
+可能这里看着本功能很简单，但实际应用中确实非常强大，之后会发现很多的variable需要插入string里面
+
+字符串方法（method）
+如：upper    它的功能就是把全部字符串变成大写
+
+>>> a = 'stupid'
+>>> print(a.upper())
+STUPID
+还要很多方法，到时候自己查就行
+
+索引（index）
+定位一个物体的位置，如
+
+a = 'hello'
+//第一个字母是h，第二个是e
+//从零开始数
+//h的index是0
+//e的index是1
+>>> a[0]
+'h'
+>>> a[-1]     //我们还可以填一个负数，表示倒数第几个
+'o'
+>>> a[1:4]   //我们可以表一个范围，也就是index[1:4)范围的内容
+'ell'
+列表（List）
+它是由特定顺数的元素组成
+
+方括号包裹，逗号分隔
+可以装多种元素
+如：
+
+>>> list1 = [1,2,3,4,5]
+>>> list1
+[1, 2, 3, 4, 5]
+>>> list2 = [list1,'abc',444,[1,2,3]]
+>>> list2
+[[1, 2, 3, 4, 5], 'abc', 444, [1, 2, 3]]
+>>>
+可通过index查询元素
+
+>>> a = [1,2,3,4,5]
+>>> print(a[3])
+4
+>>> print(a[0:3])
+[1, 2, 3]
+>>> print(a[:3])
+[1, 2, 3]
+>>> print(a[2:])
+[3, 4, 5]
+>>>
+也可修改
+
+>>> a[0]=99
+>>> a
+[99, 2, 3, 4, 5]
+>>>
+也可在列表后添加东西
+
+>>> b = [1,2,3,4,5,6,7]
+>>> b.append(100)
+>>> b
+[1, 2, 3, 4, 5, 6, 7, 100]
+使用insert可指定插入
+
+>>> b
+[1, 2, 3, 4, 5, 6, 7, 100]
+>>> b.insert(3,888)
+>>> b
+[1, 2, 3, 888, 4, 5, 6, 7, 100]
+>>>
+也可删除（pop方法）
+
+>>> b.pop()     //删除最后一项，并显示删除的内容
+100
+>>> b
+[1, 2, 3, 888, 4, 5, 6, 7]
+也可以填一个index
+
+>>> b.pop(0)
+1
+>>> b
+[2, 3, 888, 4, 5, 6, 7]
+>>>
+我们还可查询list的长度，用len（）
+
+>>> b
+[2, 3, 888, 4, 5, 6, 7]
+>>> len(b)
+7
+总之，list还要很多的方法函数，需要的话自行查询~
+
+使用编辑器编写代码
+随着我们代码越写越多，终端写代码肯定是不合适的，所以我们需要用编辑器来写，首先我们先打开PS，新建一个文件夹hello：
+
+PS C:\Windows\system32> cd /
+PS C:\> mkdir hello
+    目录: C:\
+Mode               LastWriteTime
+----               -------------
+d-----      2018/6/2  下午 09:57
+PS C:\>
+然后我们进入到hello中：
+
+PS C:\> cd hello
+PS C:\hello>
+记住，要想运行py文件，就要在正确的文件夹下操作操作，我们再把编辑器打开，新建一个text文件
+
+哦，我这里用的是Visio Studio Code，市面上有很多的编辑器，随便用，操作方式大同小异：
+
+
+
+接下来我们就可以简单的演示一下，编写以下代码：
+
+
+
+保存后我们可以去资源管理器看一眼，会发现，这个文件已经在hello文件夹里了：
+
+
+
+然后回到终端，执行我们的text.py文件
+
+PS C:\hello> python text.py
+hello
+PS C:\hello>
+
+
+没问题！
+
+PS：讲一个小技巧，要是嫌每次开终端输入文件夹所在位置很麻烦的话，可以这样操作
+
+打开终端，输入cd
+然后在电脑上找到文件夹
+拖动文件夹到终端里
+ok
+Function 函数
+也就是带名字的代码块
+
+可以完成特定的任务
+便于重复使用
+格式
+def function_name():
+  //do sth here
+function_name()  //执行函数
+演示
+首先我们写一个smile.py文件在hello中
+
+def smile():
+    return '  QAQ  '
+print(smile())
+然后根据之前的知识，执行：
+
+
+
+加上参数
+def hello(name):     //name是形参
+    print('hello ' + name)
+hello ('WK')   //wk是实参
+执行后可得：
+
+PS C:\hello> python hello.py
+hello WK
+参数
+参数可以后很多
+def hello(name,age):
+    print('Hello ' + name + '.You are ' + age)
+hello ('WK','18')
+执行后：
+
+PS C:\hello> python hello.py
+Hello WK.You are 18
+传入不当会报错
+比如下例，18作为数字的话：
+
+def hello(name,age):
+    print('Hello ' + name + '.You are ' + age)
+hello ('WK',18)
+得到：
+
+PS C:\hello> python hello.py
+Traceback (most recent call last):
+  File "hello.py", line 4, in <module>
+    hello ('WK',18)
+  File "hello.py", line 2, in hello
+    print('Hello ' + name + '.You are ' + age)
+TypeError: must be str, not int
+很明显，数据格式问题，传入数据的时候发生错误，然后报错
+
+可知，要是你的代码不够strong的话，用户提供的数据可能把你的程序搞垮滴~
+
+可以设置默认值
+为了避免在传入参数的时候漏填几个，可以设置默认值来避免报错，如我们默认age位18，然而我们少填了age的值：
+
+def hello(name,age = 18):
+    print('Hello ' + name + '.You are ' + age)
+hello ('WK')
+执行一下会发现：
+
+PS C:\hello> python hello.py
+Hello WK.You are 18
+我没有填写年纪，但默认是18就填上去了，所以没有出错。
