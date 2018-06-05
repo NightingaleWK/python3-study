@@ -1,2 +1,2 @@
 # python3-study
-just study~
+just for fun~
