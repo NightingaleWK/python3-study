@@ -1,2 +1,2 @@
 # python3-study
-just for fun~
+个人学习用
